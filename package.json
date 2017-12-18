@@ -1,0 +1,38 @@
+{
+  "name": "jwks-verify-express",
+  "version": "0.0.0",
+  "description": "Express middleware to verify JWS tokens for a given JWKS.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "nyc mocha",
+    "lint": "eslint *.js test/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/jorge.suit/jwks-verify-express.git"
+  },
+  "keywords": [
+    "express",
+    "middleware",
+    "JWS",
+    "JWKS",
+    "JWT"
+  ],
+  "author": "Jorge Suit <josp.jorge@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/jorge.suit/jwks-verify-express/issues"
+  },
+  "homepage": "https://gitlab.com/jorge.suit/jwks-verify-express#README",
+  "devDependencies": {
+    "chakram": "^1.5.0",
+    "eslint": "^4.13.1",
+    "express": "^4.16.2",
+    "express-bearer-token": "^2.1.1",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0"
+  }
+}
