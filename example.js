@@ -1,3 +1,5 @@
+/* eslint no-process-env: "off" */
+
 const express = require('express');
 const bearerToken = require('express-bearer-token');
 const jwsExpress = require('./');
@@ -17,4 +19,6 @@ app.get('/hello', (req, res) => {
   });
 });
 
-app.listen(4000);
+const port = 4000;
+
+app.listen(port);
