@@ -1,18 +1,18 @@
 {
-  "name": "jwks-verify-express",
+  "name": "jws-express",
   "version": "0.0.0",
-  "description": "Express middleware to verify JWS tokens for a given JWKS.",
+  "description": "Express middleware to verify JWS tokens.",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc mocha test/*.js",
     "lint": "eslint *.js test/**"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/jorge.suit/jwks-verify-express.git"
+    "url": "git+ssh://git@gitlab.com/jorge.suit/jws-express.git"
   },
   "keywords": [
     "express",
@@ -24,15 +24,24 @@
   "author": "Jorge Suit <josp.jorge@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/jorge.suit/jwks-verify-express/issues"
+    "url": "https://gitlab.com/jorge.suit/jws-express/issues"
   },
-  "homepage": "https://gitlab.com/jorge.suit/jwks-verify-express#README",
+  "homepage": "https://gitlab.com/jorge.suit/jws-express#README",
   "devDependencies": {
+    "chai": "^4.1.2",
     "chakram": "^1.5.0",
     "eslint": "^4.13.1",
     "express": "^4.16.2",
     "express-bearer-token": "^2.1.1",
+    "jwks-db": "0.0.3",
     "mocha": "^4.0.1",
-    "nyc": "^11.3.0"
+    "nyc": "^11.4.1"
+  },
+  "dependencies": {
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2",
+    "ms": "^2.1.1",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5"
   }
 }

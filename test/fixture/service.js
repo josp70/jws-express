@@ -1,30 +1,35 @@
 const express = require('express');
 const bearerToken = require('express-bearer-token');
+const jwsExpress = require('../../index');
 
-const app = express();
-
-app.use(bearerToken());
-
-app.get('/hello', (req, res) => {
-  res.send(`Hello World: ${req.token}`);
-});
-
-let server = null;
-
-function start() {
+function start(jwks) {
   const port = 0;
+  const app = express();
 
-  server = app.listen(port, () => {
-      console.log(`Server listening on port ${server.address().port}`);
-      app.emit('ready', null);
+  app.use(bearerToken());
+  app.use(jwsExpress({
+    jwks: jwks || process.env.JWKS_ENDPOINT,
+    memberDecoded: 'jwsDecoded'
+  }));
+
+  app.get('/hello', (req, res) => {
+    res.json({
+      JWS: req.token,
+      jwsDecoded: req.jwsDecoded
     });
-    exports.server = server;
-  }
+  });
+
+  return new Promise((resolve) => {
+    const server = app.listen(port, () => {
+      console.log(`Server listening on port ${server.address().port}`);
+      resolve(server);
+    });
+  });
+}
 
 /* eslint no-process-env: "off" */
 if (process.env.NODE_ENV === 'test') {
   exports.start = start;
-  exports.app = app;
 } else {
   start();
 }

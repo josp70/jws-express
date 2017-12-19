@@ -55,10 +55,7 @@
         "func-call-spacing": "error",
         "func-name-matching": "error",
         "func-names": "error",
-        "func-style": [
-            "error",
-            "declaration"
-        ],
+        "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
         "function-paren-newline": ["error", "consistent"],
         "generator-star-spacing": "error",
         "getter-return": "error",
@@ -87,7 +84,7 @@
         "max-lines": "error",
         "max-nested-callbacks": "error",
         "max-params": ["error", {"max": 4}],
-        "max-statements": "error",
+        "max-statements": ["error", 10, { "ignoreTopLevelFunctions": false }],
         "max-statements-per-line": "error",
         "multiline-comment-style": ["error", "bare-block"],
         "multiline-ternary": "error",
