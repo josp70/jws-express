@@ -1,6 +1,6 @@
 {
   "name": "jws-express",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Express middleware to verify JWS tokens.",
   "main": "index.js",
   "directories": {
