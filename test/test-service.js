@@ -153,7 +153,7 @@ describe('JWS-EXPRESS', () => {
     describe('Bad Request', () => {
       it('return 401 for JWKS endpoint not found', () => {
         jwsExpress({
-          jwks: 'http://127.0.0.1/nowhere'
+          jwks: 'http://www.google.com/nowhere'
         });
         const response = chakram.get(`${url('main')}/hello?access_token=${jwsToken}`);
 
@@ -162,9 +162,27 @@ describe('JWS-EXPRESS', () => {
           name: 'BadRequest',
           message: 'error requesting JWKS endpoint',
           data: {
-            uri: 'http://127.0.0.1/nowhere',
+            uri: 'http://www.google.com/nowhere',
             statusCode: 404
           }
+        });
+        after(() => {
+          // console.log(response.valueOf().body);
+        });
+        return chakram.wait();
+      });
+
+      it('return 401 for JWKS endpoint refused', () => {
+        jwsExpress({
+          jwks: 'http://127.0.0.1:1234/nowhere'
+        });
+        const response = chakram.get(`${url('main')}/hello?access_token=${jwsToken}`);
+
+        expect(response).to.have.status(HTTP401);
+        expect(response).to.comprise.of.json({
+          name: 'InvalidKeyStore',
+          message: 'RequestError: Error: connect ECONNREFUSED 127.0.0.1:1234',
+          data: {uri: 'http://127.0.0.1:1234/nowhere'}
         });
         after(() => {
           // console.log(response.valueOf().body);
