@@ -118,7 +118,7 @@ module.exports = (options) => {
       const token = config.getToken(req);
 
       if (typeof token === 'string') {
-        verifyCache.verify(token)
+        return verifyCache.verify(token)
         .then((result) => {
           set(req, config.memberDecoded, {
             protected: result.protected,
@@ -127,13 +127,18 @@ module.exports = (options) => {
           });
           next();
         });
-      } else {
-        res.status(HTTP401).json({
-          name: 'InvalidToken',
-          message: 'token must be a string'
-        });
       }
+      return res.status(HTTP401).json({
+        name: 'InvalidToken',
+        message: 'token must be a string'
+      });
     })
-    .catch((reason) => res.status(HTTP401).json(reason));
+    .catch((reason) => {
+      res.status(HTTP401).json({
+        name: reason.name,
+        message: reason.message,
+        data: reason.data
+      });
+    });
   };
 };
